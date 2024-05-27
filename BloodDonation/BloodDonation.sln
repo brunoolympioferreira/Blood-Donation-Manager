@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BloodDonation", "BloodDonation\BloodDonation.csproj", "{37CD6A4C-0C3A-4CF8-A5B9-BD56203B35BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BloodDonation.API", "BloodDonation\BloodDonation.API.csproj", "{37CD6A4C-0C3A-4CF8-A5B9-BD56203B35BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BloodDonation.Application", "BloodDonation.Application\BloodDonation.Application.csproj", "{A29DA819-1AEF-48D8-844F-DD6C211F1E89}"
 EndProject
