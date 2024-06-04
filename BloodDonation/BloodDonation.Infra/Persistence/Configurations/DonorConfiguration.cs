@@ -16,5 +16,9 @@ public class DonorConfiguration : IEntityTypeConfiguration<Donor>
         builder.Property(d => d.Weight).IsRequired();
         builder.Property(d => d.BloodType).HasConversion<string>().IsRequired();
         builder.Property(d => d.RhFact).HasConversion<string>().IsRequired();
+
+        //builder.HasOne(d => d.Address)
+        //    .WithOne(a => a.Donor)
+        //    .HasForeignKey<Address>(a => a.Donor.Id);
     }
 }
