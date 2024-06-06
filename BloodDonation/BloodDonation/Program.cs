@@ -1,4 +1,6 @@
 using BloodDonation.Infra;
+using Pomelo.EntityFrameworkCore.MySql.Internal;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfraModule();
+
+builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
+{
+    Log.Logger = new LoggerConfiguration()
+        .MinimumLevel.Warning()
+        .WriteTo.MySQL(Environment.GetEnvironmentVariable("CS_MYSQL_LOCALHOST_BLOOD_DONATION"))
+        .CreateLogger();
+}).UseSerilog();
 
 var app = builder.Build();
 
