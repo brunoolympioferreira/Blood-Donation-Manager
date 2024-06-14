@@ -1,4 +1,5 @@
-﻿using BloodDonation.Application.Services.Authentication;
+﻿using BloodDonation.Application.Services.Account;
+using BloodDonation.Application.Services.Authentication;
 using BloodDonation.Application.Services.User;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +15,7 @@ public static class ApplicationModule
     {
         return services
             .AddScoped<IUserService, UserService>()
-            .AddScoped<IAuthService, AuthService>();
+            .AddScoped<IAuthService, AuthService>()
+            .AddScoped<ILoginService, LoginService>();
     }
 }

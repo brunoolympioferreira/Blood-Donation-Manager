@@ -18,4 +18,10 @@ public class UserRepository(BloodDonationDbContext context) : IUserRepository
             .AsNoTracking()
             .AnyAsync(u => u.Email.Equals(email) && u.Id != id);
     }
+
+    public async Task<User> GetUserByEmailAndPasswordAsync(string email, string passwordHash)
+    {
+        User? user = await _context.Users.AsNoTracking().SingleOrDefaultAsync(u => u.Email == email && u.Password == passwordHash);
+        return user;
+    }
 }
