@@ -4,5 +4,5 @@ using BloodDonation.Application.Models.ViewModels.User;
 namespace BloodDonation.Application.Services.User;
 public interface IUserService
 {
-    Task<UserCreatedViewModel> Create(UserInputModel model);
+    Task<UserCreatedViewModel> AddAsync(UserInputModel model);
 }

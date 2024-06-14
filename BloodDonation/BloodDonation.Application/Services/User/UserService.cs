@@ -14,7 +14,7 @@ public class UserService : IUserService
         _unityOfWork = unityOfWork;
         _authService = authService;
     }
-    public async Task<UserCreatedViewModel> Create(UserInputModel model)
+    public async Task<UserCreatedViewModel> AddAsync(UserInputModel model)
     {
         Validate(model);
 
