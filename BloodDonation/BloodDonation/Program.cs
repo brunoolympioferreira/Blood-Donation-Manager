@@ -1,4 +1,5 @@
 using BloodDonation.API.Filters;
+using BloodDonation.Application;
 using BloodDonation.Infra;
 using Serilog;
 
@@ -14,6 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddInfraModule();
+builder.Services.AddApplicationModule();
 
 builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
 {

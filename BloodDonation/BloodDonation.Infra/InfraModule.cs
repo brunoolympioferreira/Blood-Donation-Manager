@@ -1,4 +1,6 @@
-﻿using BloodDonation.Infra.Persistence;
+﻿using BloodDonation.Core.Repositories;
+using BloodDonation.Infra.Persistence;
+using BloodDonation.Infra.Persistence.Repositories;
 using BloodDonation.Infra.Persistence.UnityOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +14,8 @@ public static class InfraModule
 
         services
             .AddDb(connectionString)
-            .AddUnityOfWork();
+            .AddUnityOfWork()
+            .AddRepositories();
     }
 
     private static IServiceCollection AddDb(this IServiceCollection services, string? connectionString)
@@ -28,5 +31,11 @@ public static class InfraModule
     private static IServiceCollection AddUnityOfWork(this IServiceCollection services)
     {
         return services.AddScoped<IUnityOfWork, UnityOfWork>();
+    }
+
+    private static IServiceCollection AddRepositories(this IServiceCollection services)
+    {
+        return services
+            .AddScoped<IUserRepository, UserRepository>();
     }
 }
