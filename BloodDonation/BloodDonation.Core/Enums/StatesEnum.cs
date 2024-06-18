@@ -52,7 +52,7 @@ public enum StatesEnum
     [Display(Name = "SC")]
     Santa_Catarina,
     [Display(Name = "SP")]
-    São_Paulo,
+    SP,
     [Display(Name = "SE")]
     Sergipe,
     [Display(Name = "TO")]

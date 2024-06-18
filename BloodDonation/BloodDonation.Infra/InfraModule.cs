@@ -2,6 +2,7 @@
 using BloodDonation.Infra.Persistence;
 using BloodDonation.Infra.Persistence.Repositories;
 using BloodDonation.Infra.Persistence.UnityOfWork;
+using BloodDonation.Infra.ViaCep;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,7 +16,8 @@ public static class InfraModule
         services
             .AddDb(connectionString)
             .AddUnityOfWork()
-            .AddRepositories();
+            .AddRepositories()
+            .AddExternalClients();
     }
 
     private static IServiceCollection AddDb(this IServiceCollection services, string? connectionString)
@@ -37,5 +39,11 @@ public static class InfraModule
     {
         return services
             .AddScoped<IUserRepository, UserRepository>();
+    }
+
+    public static IServiceCollection AddExternalClients(this IServiceCollection services)
+    {
+        return services
+            .AddScoped<IViaCepClient, ViaCepClient>();
     }
 }

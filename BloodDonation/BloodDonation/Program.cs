@@ -2,10 +2,17 @@ using BloodDonation.API.Filters;
 using BloodDonation.Application;
 using BloodDonation.Infra;
 using Serilog;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+{
+    x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
+
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionsFilter)));
 
 builder.Services.AddControllers();
