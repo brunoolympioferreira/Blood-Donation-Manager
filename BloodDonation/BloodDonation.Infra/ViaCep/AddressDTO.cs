@@ -9,5 +9,5 @@ public class AddressDTO
     public string UF { get; set; }
     public string CEP { get; set; }
 
-    public Address ToEntity() => new(Logradouro, Localidade, (StatesEnum)Enum.Parse(typeof(StatesEnum), UF), CEP);
+    public Address ToEntity() => new(Logradouro, Localidade, UF, CEP);
 }

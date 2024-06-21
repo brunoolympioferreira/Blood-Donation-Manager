@@ -55,7 +55,7 @@ namespace BloodDonation.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Adresses");
+                    b.ToTable("Adresses", (string)null);
                 });
 
             modelBuilder.Entity("BloodDonation.Core.Entities.BloodStock", b =>
@@ -83,7 +83,7 @@ namespace BloodDonation.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BloodStocks");
+                    b.ToTable("BloodStocks", (string)null);
                 });
 
             modelBuilder.Entity("BloodDonation.Core.Entities.Donation", b =>
@@ -111,7 +111,7 @@ namespace BloodDonation.Infra.Migrations
 
                     b.HasIndex("DonorId");
 
-                    b.ToTable("Donations");
+                    b.ToTable("Donations", (string)null);
                 });
 
             modelBuilder.Entity("BloodDonation.Core.Entities.Donor", b =>
@@ -161,7 +161,7 @@ namespace BloodDonation.Infra.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.ToTable("Donors");
+                    b.ToTable("Donors", (string)null);
                 });
 
             modelBuilder.Entity("BloodDonation.Core.Entities.User", b =>
@@ -193,7 +193,7 @@ namespace BloodDonation.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("BloodDonation.Core.Entities.Donation", b =>
