@@ -1,7 +1,10 @@
 using BloodDonation.API.Filters;
 using BloodDonation.Application;
 using BloodDonation.Infra;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +27,24 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddInfraModule();
 builder.Services.AddApplicationModule();
 
+var key = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("BloodDonation_Key"));
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
+
 builder.Host.ConfigureAppConfiguration((hostingContext, config) =>
 {
     Log.Logger = new LoggerConfiguration()
@@ -43,6 +64,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -12,6 +12,6 @@ public class AddressConfiguration : IEntityTypeConfiguration<Address>
         builder.Property(a => a.Street).IsRequired().HasMaxLength(200);
         builder.Property(a => a.City).IsRequired().HasMaxLength(100);
         builder.Property(a => a.State).IsRequired().HasConversion<string>();
-        builder.Property(a => a.CEP).IsRequired().HasMaxLength(8);
+        builder.Property(a => a.CEP).IsRequired().HasMaxLength(9);
     }
 }

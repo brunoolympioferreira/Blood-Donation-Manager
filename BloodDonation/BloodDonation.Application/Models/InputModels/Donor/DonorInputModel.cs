@@ -1,4 +1,5 @@
-﻿using BloodDonation.Core.Enums;
+﻿using BloodDonation.Core.Entities;
+using BloodDonation.Core.Enums;
 
 namespace BloodDonation.Application.Models.InputModels.Donor;
 public class DonorInputModel
@@ -11,4 +12,6 @@ public class DonorInputModel
     public BloodTypesEnum BloodType { get; set; }
     public RhFatorEnum RhFact { get; set; }
     public string CEP { get; set; }
+
+    public Core.Entities.Donor ToEntity(Address address) => new(Name, Email, BirthdayDate, Gender, Weight, BloodType, RhFact, address);
 }
