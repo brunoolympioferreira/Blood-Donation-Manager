@@ -3,7 +3,7 @@
 namespace BloodDonation.Core.Entities;
 public class Address : BaseEntity
 {
-    public Address(string street, string city, StatesEnum state, string cEP)
+    public Address(string street, string city, string state, string cEP)
     {
         Street = street;
         City = city;
@@ -18,8 +18,6 @@ public class Address : BaseEntity
 
     public string Street { get; private set; }
     public string City { get; private set; }
-    public StatesEnum State { get; private set; }
+    public string State { get; private set; }
     public string CEP { get; private set; }
-
-    //public virtual Donor Donor { get; set; }
 }

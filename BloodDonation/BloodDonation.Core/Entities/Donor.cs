@@ -3,7 +3,7 @@
 namespace BloodDonation.Core.Entities;
 public class Donor : BaseEntity
 {
-    public Donor(string name, string email, DateTime birthdayDate, GenderEnum gender, double weight, BloodTypesEnum bloodType, RhFatorEnum rhFact)
+    public Donor(string name, string email, DateTime birthdayDate, GenderEnum gender, double weight, BloodTypesEnum bloodType, RhFatorEnum rhFact, Address address)
     {
         Name = name;
         Email = email;
@@ -12,7 +12,12 @@ public class Donor : BaseEntity
         Weight = weight;
         BloodType = bloodType;
         RhFact = rhFact;
+
+        Address = address;
     }
+
+    // EF Core
+    public Donor() { }
 
     public string Name { get; private set; }
     public string Email { get; private set; }
