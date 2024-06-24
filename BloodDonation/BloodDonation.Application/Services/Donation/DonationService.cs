@@ -7,14 +7,17 @@ public class DonationService(IUnityOfWork unityOfWork) : IDonationService
 {
     private readonly IUnityOfWork _unityOfWork = unityOfWork;
 
-    public Task<Guid> Register(DonationInputModel model)
+    public async Task<Guid> Register(DonationInputModel model)
     {
 
-        ///Menor de idade não pode doar, mas pode ter cadastro.
-        ///Mulheres só podem doar de 90 em 90 dias.(PLUS)
+        ///Menor de idade não pode doar, mas pode ter cadastro. 
+        ///Mulheres só podem doar de 90 em 90 dias.(PLUS) 
         ///Homens só podem doar de 60 em 60 dias. (PLUS)
+        ///(criar um get de donor para validar informações)
 
         ValidateModel(model);
+
+        var donor = await _unityOfWork.Donors.GetByIdAsync(model.DonorId);
 
         return default;
     }

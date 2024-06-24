@@ -18,4 +18,14 @@ public class DonorRepository(BloodDonationDbContext context) : IDonorRepository
 
         return existEmail;
     }
+
+    public async Task<Donor> GetByIdAsync(Guid id)
+    {
+        Donor? donor = await _context.Donors
+            .AsNoTracking()
+            .Include(d => d.Donations)
+            .SingleOrDefaultAsync(d => d.Id == id);
+
+        return donor;
+    }
 }
