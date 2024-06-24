@@ -5,5 +5,6 @@ public interface IUnityOfWork
 {
     IUserRepository Users {  get; }
     IDonorRepository Donors { get; }
+    IDonationRepository Donations { get; }
     Task<int> CompleteAsync();
 }
