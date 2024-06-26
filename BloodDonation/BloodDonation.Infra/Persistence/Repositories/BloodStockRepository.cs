@@ -1,5 +1,7 @@
 ﻿using BloodDonation.Core.Entities;
+using BloodDonation.Core.Enums;
 using BloodDonation.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace BloodDonation.Infra.Persistence.Repositories;
 public class BloodStockRepository : IBloodStockRepository
@@ -9,8 +11,19 @@ public class BloodStockRepository : IBloodStockRepository
     {
         _context = context;
     }
-    public async Task AddAsync(BloodStock bloodStock)
+
+    public async Task<BloodStock> GetByParams(BloodTypesEnum bloodType, RhFatorEnum rhFactor)
     {
-        await _context.AddAsync(bloodStock);
+        BloodStock? bloodStock = await _context.BloodStocks
+            .AsNoTracking()
+            .Where(x => x.BloodType == bloodType && x.RhFactor == rhFactor)
+            .SingleOrDefaultAsync();
+
+        return bloodStock;
+    }
+
+    public void Update(BloodStock bloodStock)
+    {
+        _context.BloodStocks.Update(bloodStock);
     }
 }

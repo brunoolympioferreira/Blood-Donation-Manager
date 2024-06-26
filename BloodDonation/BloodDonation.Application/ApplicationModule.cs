@@ -1,6 +1,7 @@
 ﻿using BloodDonation.Application.Services.Account;
 using BloodDonation.Application.Services.Address;
 using BloodDonation.Application.Services.Authentication;
+using BloodDonation.Application.Services.BloodStock;
 using BloodDonation.Application.Services.Donation;
 using BloodDonation.Application.Services.Donor;
 using BloodDonation.Application.Services.User;
@@ -22,6 +23,7 @@ public static class ApplicationModule
             .AddScoped<ILoginService, LoginService>()
             .AddScoped<IAddressService, AddressService>()
             .AddScoped<IDonorService, DonorService>()
-            .AddScoped<IDonationService, DonationService>();
+            .AddScoped<IDonationService, DonationService>()
+            .AddScoped<IBloodStockService, BloodStockService>();
     }
 }
