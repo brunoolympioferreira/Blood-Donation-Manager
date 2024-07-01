@@ -4,13 +4,9 @@ using BloodDonation.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace BloodDonation.Infra.Persistence.Repositories;
-public class BloodStockRepository : IBloodStockRepository
+public class BloodStockRepository(BloodDonationDbContext context) : IBloodStockRepository
 {
-    private readonly BloodDonationDbContext _context;
-    public BloodStockRepository(BloodDonationDbContext context)
-    {
-        _context = context;
-    }
+    private readonly BloodDonationDbContext _context = context;
 
     public async Task<BloodStock> GetByParams(BloodTypesEnum bloodType, RhFatorEnum rhFactor)
     {

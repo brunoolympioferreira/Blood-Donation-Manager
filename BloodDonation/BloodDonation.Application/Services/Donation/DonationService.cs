@@ -1,12 +1,15 @@
-﻿using BloodDonation.Application.Models.InputModels.Donation;
+﻿using BloodDonation.Application.Models.InputModels.BloodStock;
+using BloodDonation.Application.Models.InputModels.Donation;
+using BloodDonation.Application.Services.BloodStock;
 using BloodDonation.Core.Enums;
 using BloodDonation.Core.Exceptions;
 using BloodDonation.Infra.Persistence.UnityOfWork;
 
 namespace BloodDonation.Application.Services.Donation;
-public class DonationService(IUnityOfWork unityOfWork) : IDonationService
+public class DonationService(IUnityOfWork unityOfWork, IBloodStockService bloodStockService) : IDonationService
 {
     private readonly IUnityOfWork _unityOfWork = unityOfWork;
+    private readonly IBloodStockService _bloodStockService = bloodStockService;
 
     public async Task<Guid> Register(DonationInputModel model)
     {
@@ -15,14 +18,14 @@ public class DonationService(IUnityOfWork unityOfWork) : IDonationService
         var donor = await _unityOfWork.Donors.GetByIdAsync(model.DonorId);
 
         bool isMinorPerson = IsMinorPerson(donor.BirthdayDate);
-        bool personCanDonate = PersonCanDonate(donor.Gender, donor.Donations);
+        bool personCantDonate = PersonCanDonate(donor.Gender, donor.Donations);
 
         if (isMinorPerson)
         {
             throw new ValidationErrorsException("Menor de idade não pode doar");
         }
         
-        if (personCanDonate == false) 
+        if (personCantDonate == true)
         {
             throw new ValidationErrorsException("Tempo desde a última doação menor que o permitido");
         }
@@ -30,6 +33,15 @@ public class DonationService(IUnityOfWork unityOfWork) : IDonationService
         var donation = model.ToEntity();
 
         await _unityOfWork.Donations.AddAsync(donation);
+
+        BloodStockInputModel bloodStockInputModel = new()
+        {
+            BloodType = donor.BloodType,
+            RhFactor = donor.RhFact,
+            MLQuantity = donation.MLQuantity
+        };
+
+        await _bloodStockService.Update(bloodStockInputModel);
 
         await _unityOfWork.CompleteAsync();
 

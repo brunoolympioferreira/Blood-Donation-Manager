@@ -13,4 +13,11 @@ public class BloodStock : BaseEntity
     public BloodTypesEnum BloodType { get; private set; }
     public RhFatorEnum RhFactor { get; private set; }
     public int MLQuantity { get; private set; }
+
+
+    public void Update(int mlQuantity)
+    {
+        MLQuantity += mlQuantity;
+        Update();
+    }
 }

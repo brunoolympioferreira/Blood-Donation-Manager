@@ -1,10 +1,17 @@
 ﻿using BloodDonation.Application.Models.InputModels.BloodStock;
+using BloodDonation.Infra.Persistence.UnityOfWork;
 
 namespace BloodDonation.Application.Services.BloodStock;
-public class BloodStockService : IBloodStockService
+public class BloodStockService(IUnityOfWork unityOfWork) : IBloodStockService
 {
-    public Task Update(BloodStockInputModel model)
+    private readonly IUnityOfWork _unityOfWork = unityOfWork;
+
+    public async Task Update(BloodStockInputModel model)
     {
-        throw new NotImplementedException();
+        Core.Entities.BloodStock bloodStock = await _unityOfWork.BloodStocks.GetByParams(model.BloodType, model.RhFactor);
+
+        bloodStock.Update(model.MLQuantity);
+
+        _unityOfWork.BloodStocks.Update(bloodStock);
     }
 }
