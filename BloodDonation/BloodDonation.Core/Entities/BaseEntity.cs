@@ -9,4 +9,9 @@ public abstract class BaseEntity()
     {
         UpdatedAt = updatedAt;
     }
+
+    protected void Update()
+    {
+        UpdatedAt = DateTime.Now;
+    }
 }

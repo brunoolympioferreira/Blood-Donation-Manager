@@ -39,7 +39,9 @@ public static class InfraModule
     {
         return services
             .AddScoped<IUserRepository, UserRepository>()
-            .AddScoped<IDonorRepository, DonorRepository>();
+            .AddScoped<IDonorRepository, DonorRepository>()
+            .AddScoped<IDonationRepository, DonationRepository>()
+            .AddScoped<IBloodStockRepository, BloodStockRepository>();
     }
 
     public static IServiceCollection AddExternalClients(this IServiceCollection services)

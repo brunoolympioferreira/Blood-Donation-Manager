@@ -6,11 +6,15 @@ public class UnityOfWork : IUnityOfWork
     private BloodDonationDbContext _context;
     public UnityOfWork(BloodDonationDbContext context,
         IUserRepository users,
-        IDonorRepository donors)
+        IDonorRepository donors,
+        IDonationRepository donations,
+        IBloodStockRepository bloodStocks)
     {
         _context = context;
         Users = users;
         Donors = donors;
+        Donations = donations;
+        BloodStocks = bloodStocks;
     }
     public async Task<int> CompleteAsync()
     {
@@ -19,6 +23,8 @@ public class UnityOfWork : IUnityOfWork
 
     public IUserRepository Users { get; }
     public IDonorRepository Donors { get; }
+    public IDonationRepository Donations { get; }
+    public IBloodStockRepository BloodStocks { get; }
 
     public void Dispose()
     {
