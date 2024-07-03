@@ -1,9 +1,11 @@
 ﻿using BloodDonation.Application.Models.InputModels.BloodStock;
 using BloodDonation.Application.Models.InputModels.Donation;
+using BloodDonation.Application.Models.ViewModels.Donation;
 using BloodDonation.Application.Services.BloodStock;
 using BloodDonation.Core.Enums;
 using BloodDonation.Core.Exceptions;
 using BloodDonation.Infra.Persistence.UnityOfWork;
+using System.Data;
 
 namespace BloodDonation.Application.Services.Donation;
 public class DonationService(IUnityOfWork unityOfWork, IBloodStockService bloodStockService) : IDonationService
@@ -46,6 +48,15 @@ public class DonationService(IUnityOfWork unityOfWork, IBloodStockService bloodS
         await _unityOfWork.CompleteAsync();
 
         return donation.Id;
+    }
+
+    public async Task<List<DonationViewModel>> GetByDonor(Guid donorId)
+    {
+        List<Core.Entities.Donation> donations = await _unityOfWork.Donations.GetByDonorIdAsync(donorId);
+
+        List<DonationViewModel> viewModels = donations.Select(d => new DonationViewModel(d)).ToList();
+
+        return viewModels;
     }
 
     private static bool PersonCanDonate(GenderEnum gender, ICollection<Core.Entities.Donation> donations)

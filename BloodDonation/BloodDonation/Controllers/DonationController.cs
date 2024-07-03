@@ -15,4 +15,11 @@ public class DonationController : ControllerBase
         var result = await service.Register(model);
         return Ok(result);
     }
+
+    [HttpGet("{donorId}")]
+    public async Task<IActionResult> GetDonationByDonorId([FromServices] IDonationService service, Guid donorId)
+    {
+        var result = await service.GetByDonor(donorId);
+        return Ok(result);
+    }
 }
