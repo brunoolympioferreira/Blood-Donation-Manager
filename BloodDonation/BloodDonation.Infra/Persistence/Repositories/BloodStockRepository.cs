@@ -22,4 +22,11 @@ public class BloodStockRepository(BloodDonationDbContext context) : IBloodStockR
     {
         _context.BloodStocks.Update(bloodStock);
     }
+
+    public async Task<List<BloodStock>> GetAllAsync()
+    {
+        List<BloodStock> stock = await _context.BloodStocks.AsNoTracking().ToListAsync();
+
+        return stock;
+    }
 }
