@@ -59,6 +59,23 @@ public class DonationService(IUnityOfWork unityOfWork, IBloodStockService bloodS
         return viewModels;
     }
 
+    public async Task<List<DonationDetailViewModel>> GetAll()
+    {
+        List<Core.Entities.Donation> donations = await _unityOfWork.Donations.GetAll();
+
+        List<Core.Entities.Donation> donationsLastMonth = CalculateDonationsLastMonth(donations);
+
+        List<DonationDetailViewModel> viewModels = donationsLastMonth.Select(d => new DonationDetailViewModel(d)).ToList();
+
+        return viewModels;
+    }
+
+    private static List<Core.Entities.Donation> CalculateDonationsLastMonth(List<Core.Entities.Donation> donations)
+    {
+        DateTime startDate = DateTime.UtcNow.AddDays(-30);
+        return donations.Where(d => d.DonationDate >= startDate).ToList();
+    }
+
     private static bool PersonCanDonate(GenderEnum gender, ICollection<Core.Entities.Donation> donations)
     {
         var lastPersonDonationDate = donations.OrderByDescending(d => d.DonationDate).FirstOrDefault()?.DonationDate ?? DateTime.MinValue;
