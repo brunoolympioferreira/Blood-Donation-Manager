@@ -6,4 +6,5 @@ public interface IDonationService
 {
     Task<Guid> Register(DonationInputModel model);
     Task<List<DonationViewModel>> GetByDonor(Guid donorId);
+    Task<List<DonationDetailViewModel>> GetAll();
 }

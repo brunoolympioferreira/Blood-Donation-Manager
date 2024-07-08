@@ -18,4 +18,15 @@ public class DonationRepository(BloodDonationDbContext context) : IDonationRepos
 
         return donation;
     }
+
+    public async Task<List<Donation>> GetAll()
+    {
+        List<Donation> donations = await _context.Donations
+            .AsNoTracking()
+            .Include(d => d.Donor)
+            .Include(a => a.Donor.Address)
+            .ToListAsync();
+
+        return donations;
+    }
 }

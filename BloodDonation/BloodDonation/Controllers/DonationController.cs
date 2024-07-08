@@ -22,4 +22,11 @@ public class DonationController : ControllerBase
         var result = await service.GetByDonor(donorId);
         return Ok(result);
     }
+
+    [HttpGet()]
+    public async Task<IActionResult> GetDonationByDonorId([FromServices] IDonationService service)
+    {
+        var result = await service.GetAll();
+        return Ok(result);
+    }
 }
