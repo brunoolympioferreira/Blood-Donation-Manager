@@ -9,3 +9,46 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border: 0;
     box-sizing: border-box;
 }
+
+// Variáveis para cores e espaçamento
+//$container-bg-color: #f8f9fa;
+$container-bg-color: red;
+$container-padding: 20px;
+$container-border-radius: 8px;
+$container-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+// Mixin para sombra
+@mixin box-shadow($shadow) {
+    box-shadow: $shadow;
+  }
+
+  // Container padrão
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: $container-padding;
+    box-sizing: border-box;
+    background-color: $container-bg-color;
+    border-radius: $container-border-radius;
+    @include box-shadow($container-shadow);
+  
+    // Estilo responsivo
+    @media (max-width: 768px) {
+      padding: 10px;
+    }
+  
+    @media (max-width: 480px) {
+      padding: 5px;
+    }
+  }
+
+  .flexLayout{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    align-content: stretch;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
