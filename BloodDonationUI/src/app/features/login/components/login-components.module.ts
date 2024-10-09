@@ -7,7 +7,7 @@ import { SharedModule } from "../../../shared/shared.module";
         LoginFormComponent
     ],
     imports: [
-        SharedModule
+        SharedModule,
     ],
     exports: [
         LoginFormComponent

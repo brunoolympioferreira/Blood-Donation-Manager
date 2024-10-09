@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "./app/core/variables.scss";
+
+// Mixin para sombra
+@mixin box-shadow($shadow) {
+    box-shadow: $shadow;
+  }
+  // Container padrão
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: $container-padding;
+    box-sizing: border-box;
+    background-color: $container-bg-color;
+    border-radius: $container-border-radius;
+    @include box-shadow($container-shadow);
+  
+    // Estilo responsivo
+    @media (max-width: 768px) {
+      padding: 10px;
+    }
+  
+    @media (max-width: 480px) {
+      padding: 5px;
+    }
+  }
+
+  .flexLayout{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    align-content: stretch;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
