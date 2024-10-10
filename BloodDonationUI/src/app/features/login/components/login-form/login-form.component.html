@@ -6,17 +6,27 @@
             </mat-card-header>
 
             <mat-card-content>
-                <form>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <!-- Campo de Email -->
                     <mat-form-field appearance="fill">
                         <mat-label>Email</mat-label>
                         <input matInput placeholder="Digite seu email" type="email">
+                        <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                            {{ getEmailErrorMessage() }}
+                        </mat-error>
                     </mat-form-field>
                     <!-- Campo de Senha -->
                     <mat-form-field appearance="fill">
                         <mat-label>Senha</mat-label>
                         <input matInput placeholder="Digite sua senha" type="password">
+                        <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                            Senha é obrigatória
+                        </mat-error>
                     </mat-form-field>
+
+                    <div>
+                        <a>Ainda não é cadastrado? Registre-se aqui</a>
+                    </div>
 
                     <!-- Botão de Login -->
                     <div class="login-button">

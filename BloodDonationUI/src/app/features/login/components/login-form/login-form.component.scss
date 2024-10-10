@@ -3,14 +3,29 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+
   }
 
   mat-card {
-    width: 400px;
+    display: flex;
+    flex-direction: column; /* Organiza os elementos em uma coluna (vertical) */
+    width: 500px;
     padding: 20px;
+    gap: 15px; /* Espaçamento entre os elementos */
+  }
+
+  mat-form-field{
+    width: 400px;
+  }
+
+  mat-card-content {
+    display: flex;
+    flex-direction: column; /* Garante que o conteúdo dentro também esteja em linhas */
+    gap: 15px; /* Espaçamento entre os campos do formulário */
   }
 
   .login-button {
     display: flex;
     justify-content: flex-end;
+    margin-top: 10px;
   }
