@@ -10,7 +10,7 @@
                     <!-- Campo de Email -->
                     <mat-form-field appearance="fill">
                         <mat-label>Email</mat-label>
-                        <input matInput placeholder="Digite seu email" type="email">
+                        <input matInput formControlName="email" placeholder="Digite seu email" type="email">
                         <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
                             {{ getEmailErrorMessage() }}
                         </mat-error>
@@ -18,7 +18,7 @@
                     <!-- Campo de Senha -->
                     <mat-form-field appearance="fill">
                         <mat-label>Senha</mat-label>
-                        <input matInput placeholder="Digite sua senha" type="password">
+                        <input matInput formControlName="password" placeholder="Digite sua senha" type="password">
                         <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
                             Senha é obrigatória
                         </mat-error>
@@ -30,7 +30,8 @@
 
                     <!-- Botão de Login -->
                     <div class="login-button">
-                        <button mat-raised-button color="primary" type="submit">Entrar</button>
+                        <button mat-raised-button color="primary" type="submit"
+                            [disabled]="loginForm.invalid">Entrar</button>
                     </div>
 
                 </form>

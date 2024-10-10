@@ -17,9 +17,18 @@ export class LoginFormComponent {
   }
 
   getEmailErrorMessage() {
+    const emailControl = this.loginForm.get('email');
+    if (emailControl?.hasError('required')) {
+      return 'Email é obrigatório';
+    }
+    return emailControl?.hasError('email') ? 'Email inválido' : '';
   }
 
   onSubmit() {
-
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
+      console.log('Email:', email, 'Senha:', password);
+      // Adicione a lógica de autenticação aqui
+    }
   }
 }
