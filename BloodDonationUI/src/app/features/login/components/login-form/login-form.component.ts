@@ -28,7 +28,6 @@ export class LoginFormComponent {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       console.log('Email:', email, 'Senha:', password);
-      // Adicione a lógica de autenticação aqui
     }
   }
 }
